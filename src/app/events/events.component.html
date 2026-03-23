@@ -1,0 +1,19 @@
+<h2>Events</h2>
+
+<!-- Add Event -->
+<input [(ngModel)]="newEvent.title" placeholder="Title">
+<input [(ngModel)]="newEvent.date" type="date">
+<input [(ngModel)]="newEvent.description" placeholder="Description">
+
+<button (click)="addEvent()">Add</button>
+
+<hr>
+
+<!-- List -->
+<div *ngFor="let e of events">
+  <h3>{{ e.title }}</h3>
+  <p>{{ e.date }}</p>
+  <p>{{ e.description }}</p>
+
+  <button (click)="deleteEvent(e.id)">Delete</button>
+</div>
