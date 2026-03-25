@@ -1,0 +1,23 @@
+<nav class="navbar">
+
+  <div class="nav-left">
+    <span class="logo">My App</span>
+
+    <a routerLink="/login" class="link">Login</a>
+
+    <a *ngIf="isLoggedIn" routerLink="/events" class="link">
+      Events
+    </a>
+  </div>
+
+  <div class="nav-right">
+    <span *ngIf="isLoggedIn" class="role">
+      {{ role }}
+    </span>
+
+    <button *ngIf="isLoggedIn" (click)="logout()" class="logout-btn">
+      Logout
+    </button>
+  </div>
+
+</nav>

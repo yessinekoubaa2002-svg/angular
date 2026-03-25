@@ -1,19 +1,90 @@
 <h2>Events</h2>
 
-<!-- Add Event -->
-<input [(ngModel)]="newEvent.title" placeholder="Title">
-<input [(ngModel)]="newEvent.date" type="date">
-<input [(ngModel)]="newEvent.description" placeholder="Description">
+<!-- Add Event Form -->
+<div style="margin-bottom: 20px;">
 
-<button (click)="addEvent()">Add</button>
+  <input [(ngModel)]="newEvent.title" placeholder="Title">
 
+  <input [(ngModel)]="newEvent.event_date" type="date">
+
+  <input [(ngModel)]="newEvent.end_date" type="date">
+
+  <input [(ngModel)]="newEvent.description" placeholder="Description">
+
+  <input [(ngModel)]="newEvent.location" placeholder="Location">
+
+  <input [(ngModel)]="newEvent.capacity" type="number" placeholder="Capacity">
+
+  <select [(ngModel)]="newEvent.category_id">
+  <option *ngFor="let c of categories" [value]="c.id">
+    {{ c.name }}
+  </option>
+</select>
+  <label>
+    Free:
+    <input type="checkbox" [(ngModel)]="newEvent.is_free">
+  </label>
+
+  <!-- Price يظهر كان إذا موش مجاني -->
+  <input 
+    *ngIf="!newEvent.is_free"
+    [(ngModel)]="newEvent.price" 
+    type="number" 
+    placeholder="Price">
+
+  <br><br>
+
+  
+
+</div>
+<button *ngIf="role === 'admin'" (click)="saveEvent()">
+  {{ selectedId ? 'Update' : 'Add' }}
+</button>
 <hr>
 
-<!-- List -->
-<div *ngFor="let e of events">
-  <h3>{{ e.title }}</h3>
-  <p>{{ e.date }}</p>
-  <p>{{ e.description }}</p>
+<h3>Filter by Category</h3>
 
-  <button (click)="deleteEvent(e.id)">Delete</button>
+<select [(ngModel)]="selectedCategoryId" (change)="loadEvents()">
+  <option [ngValue]="null">All</option>
+  <option *ngFor="let c of categories" [value]="c.id">
+    {{ c.name }}
+  </option>
+</select>
+
+<h3>Search</h3>
+
+<input 
+  type="text" 
+  [(ngModel)]="searchTerm" 
+  (input)="loadEvents()" 
+  placeholder="Search events..."
+>
+
+<!-- Events List -->
+<div *ngFor="let e of events" style="margin-bottom: 15px; border-bottom: 1px solid #ccc;">
+
+  <h3>{{ e.title }}</h3>
+
+  <!-- format date -->
+  <p><strong>Date:</strong> {{ e.event_date | date:'yyyy-MM-dd' }}</p>
+
+  <p><strong>Description:</strong> {{ e.description }}</p>
+
+  <p><strong>Location:</strong> {{ e.location }}</p>
+
+  <p><strong>Capacity:</strong> {{ e.capacity }}</p>
+
+  <p><strong>Category ID:</strong> {{ e.category_id }}</p>
+
+  <p><strong>Price:</strong> {{ e.is_free ? 'Free' : e.price + ' DT' }}</p>
+
+  <button *ngIf="role === 'admin'" (click)="deleteEvent(e.id!)">
+  Delete
+</button>
+
+<button *ngIf="role === 'admin'" (click)="editEvent(e)">
+  Edit
+</button>
+
+
 </div>

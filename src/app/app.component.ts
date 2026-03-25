@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ProjetFrontend';
+  logout() {
+  localStorage.removeItem('token');
+  localStorage.removeItem('role');
+
+  window.location.reload();
+}
+get isLoggedIn() {
+  return !!localStorage.getItem('token');
+}
 }
