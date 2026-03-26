@@ -7,13 +7,18 @@ import { AppComponent } from './app.component';
 import { EventsComponent } from './events/events.component';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { MyRegistrationsComponent } from './my-registrations/my-registrations.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     EventsComponent,
     LoginComponent,
-    NavbarComponent
+    NavbarComponent,
+    DashboardComponent,
+    MyRegistrationsComponent
   ],
   imports: [
     BrowserModule,

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EventService } from '../services/event.service';
 import { EventModel } from '../models/event';
 import { CategoryService } from '../services/category.service';
+import { RegistrationService } from '../services/registration.service';
 
 @Component({
   selector: 'app-events',
@@ -41,7 +42,7 @@ resetForm() {
   this.selectedId = null;
 }
 
-  constructor(private eventService: EventService , private categoryService: CategoryService) {}
+  constructor(private eventService: EventService , private categoryService: CategoryService,private registrationService: RegistrationService) {}
 
   get role() {
   return localStorage.getItem('role');
@@ -99,5 +100,15 @@ resetForm() {
       this.resetForm();
     });
   }
+}
+registerToEvent(eventId: number) {
+  this.registrationService.register(eventId).subscribe({
+    next: () => {
+      alert('Registered successfully ✅');
+    },
+    error: () => {
+      alert('Already registered ❌');
+    }
+  });
 }
 }

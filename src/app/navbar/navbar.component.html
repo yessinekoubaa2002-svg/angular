@@ -20,4 +20,12 @@
     </button>
   </div>
 
+  <a *ngIf="isLoggedIn && role === 'admin'" routerLink="/dashboard">
+  Dashboard
+</a>
+
+<a *ngIf="isLoggedIn" routerLink="/my-registrations">
+  My Registrations
+</a>
+
 </nav>

@@ -1,0 +1,16 @@
+<h2>My Registrations</h2>
+
+<div *ngFor="let r of registrations">
+
+  <h3>{{ r.event.title }}</h3>
+
+  <p>Date: {{ r.event.event_date }}</p>
+  <p>Location: {{ r.event.location }}</p>
+
+  <button (click)="cancel(r.event.id)">
+    Cancel ❌
+  </button>
+
+  <hr>
+
+</div>
